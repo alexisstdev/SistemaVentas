@@ -119,12 +119,6 @@ namespace Sistema_de_Ventas
             }
         }
 
-        private void frmProductos_Load(object sender, EventArgs e)
-        {
-            miProducto.DeserializarLista();
-            ActualizarDataGrid();
-        }
-
         private void LimpiarDatos()
         {
             foreach (Control control in datosContainer.Controls)
@@ -133,6 +127,12 @@ namespace Sistema_de_Ventas
                 if (control is TextBox) control.Text = "";
                 if (control is NumericUpDown) nud.Value = 0;
             }
+        }
+
+        private void frmProductos_Load_1(object sender, EventArgs e)
+        {
+            miProducto.DeserializarLista();
+            ActualizarDataGrid();
         }
     }
 }
