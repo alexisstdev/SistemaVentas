@@ -39,6 +39,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.dtgClientes = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Teléfono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.btnEliminar = new FontAwesome.Sharp.IconButton();
             this.btnLimpiar = new FontAwesome.Sharp.IconButton();
@@ -52,10 +56,6 @@
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTeléfono = new System.Windows.Forms.TextBox();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Teléfono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).BeginInit();
             this.datosContainer.SuspendLayout();
             this.SuspendLayout();
@@ -154,9 +154,8 @@
             this.dtgClientes.AllowUserToResizeRows = false;
             this.dtgClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtgClientes.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.dtgClientes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(234)))), ((int)(((byte)(237)))));
+            this.dtgClientes.BackgroundColor = System.Drawing.Color.White;
             this.dtgClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dtgClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14F);
@@ -203,6 +202,41 @@
             this.dtgClientes.TabIndex = 100;
             this.dtgClientes.SelectionChanged += new System.EventHandler(this.dtgClientes_SelectionChanged);
             // 
+            // ID
+            // 
+            this.ID.FillWeight = 32.65088F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ID.Width = 35;
+            // 
+            // Nombre
+            // 
+            this.Nombre.FillWeight = 12.80631F;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Nombre.Width = 90;
+            // 
+            // Correo
+            // 
+            this.Correo.FillWeight = 2.499833F;
+            this.Correo.HeaderText = "Correo";
+            this.Correo.Name = "Correo";
+            this.Correo.ReadOnly = true;
+            this.Correo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Correo.Width = 79;
+            // 
+            // Teléfono
+            // 
+            this.Teléfono.HeaderText = "Teléfono";
+            this.Teléfono.Name = "Teléfono";
+            this.Teléfono.ReadOnly = true;
+            this.Teléfono.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Teléfono.Width = 93;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -246,7 +280,7 @@
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(189)))), ((int)(((byte)(129)))));
-            this.btnLimpiar.IconChar = FontAwesome.Sharp.IconChar.Edit;
+            this.btnLimpiar.IconChar = FontAwesome.Sharp.IconChar.Eraser;
             this.btnLimpiar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(189)))), ((int)(((byte)(129)))));
             this.btnLimpiar.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnLimpiar.IconSize = 40;
@@ -386,41 +420,6 @@
             this.txtTeléfono.Name = "txtTeléfono";
             this.txtTeléfono.Size = new System.Drawing.Size(266, 23);
             this.txtTeléfono.TabIndex = 78;
-            // 
-            // ID
-            // 
-            this.ID.FillWeight = 32.65088F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ID.Width = 35;
-            // 
-            // Nombre
-            // 
-            this.Nombre.FillWeight = 12.80631F;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Nombre.Width = 90;
-            // 
-            // Correo
-            // 
-            this.Correo.FillWeight = 2.499833F;
-            this.Correo.HeaderText = "Correo";
-            this.Correo.Name = "Correo";
-            this.Correo.ReadOnly = true;
-            this.Correo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Correo.Width = 79;
-            // 
-            // Teléfono
-            // 
-            this.Teléfono.HeaderText = "Teléfono";
-            this.Teléfono.Name = "Teléfono";
-            this.Teléfono.ReadOnly = true;
-            this.Teléfono.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Teléfono.Width = 93;
             // 
             // frmClientes
             // 

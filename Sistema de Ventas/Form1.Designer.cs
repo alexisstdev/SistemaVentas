@@ -34,11 +34,13 @@
             this.menuVentas = new FontAwesome.Sharp.IconMenuItem();
             this.menuClientes = new FontAwesome.Sharp.IconMenuItem();
             this.menuCompras = new FontAwesome.Sharp.IconMenuItem();
+            this.menuUsuarios = new FontAwesome.Sharp.IconMenuItem();
             this.menuProductos = new FontAwesome.Sharp.IconMenuItem();
             this.lblUser = new System.Windows.Forms.Label();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.container = new System.Windows.Forms.Panel();
-            this.menuUsuarios = new FontAwesome.Sharp.IconMenuItem();
+            this.menuAñadirCompra = new FontAwesome.Sharp.IconMenuItem();
+            this.menuVerCompras = new FontAwesome.Sharp.IconMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -112,6 +114,9 @@
             // 
             // menuCompras
             // 
+            this.menuCompras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuAñadirCompra,
+            this.menuVerCompras});
             this.menuCompras.Font = new System.Drawing.Font("Century Gothic", 14F);
             this.menuCompras.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.menuCompras.IconChar = FontAwesome.Sharp.IconChar.ShoppingBag;
@@ -122,7 +127,20 @@
             this.menuCompras.Size = new System.Drawing.Size(211, 52);
             this.menuCompras.Text = "Compras";
             this.menuCompras.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.menuCompras.Click += new System.EventHandler(this.menuCompras_Click);
+            // 
+            // menuUsuarios
+            // 
+            this.menuUsuarios.Font = new System.Drawing.Font("Century Gothic", 14F);
+            this.menuUsuarios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.menuUsuarios.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            this.menuUsuarios.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(116)))), ((int)(((byte)(131)))));
+            this.menuUsuarios.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.menuUsuarios.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.menuUsuarios.Name = "menuUsuarios";
+            this.menuUsuarios.Size = new System.Drawing.Size(211, 52);
+            this.menuUsuarios.Text = "Usuarios";
+            this.menuUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click_1);
             // 
             // menuProductos
             // 
@@ -176,19 +194,25 @@
             this.container.Size = new System.Drawing.Size(1290, 683);
             this.container.TabIndex = 71;
             // 
-            // menuUsuarios
+            // menuAñadirCompra
             // 
-            this.menuUsuarios.Font = new System.Drawing.Font("Century Gothic", 14F);
-            this.menuUsuarios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.menuUsuarios.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
-            this.menuUsuarios.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(116)))), ((int)(((byte)(131)))));
-            this.menuUsuarios.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.menuUsuarios.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.menuUsuarios.Name = "menuUsuarios";
-            this.menuUsuarios.Size = new System.Drawing.Size(211, 52);
-            this.menuUsuarios.Text = "Usuarios";
-            this.menuUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.menuUsuarios.Click += new System.EventHandler(this.menuUsuarios_Click_1);
+            this.menuAñadirCompra.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.menuAñadirCompra.IconColor = System.Drawing.Color.Black;
+            this.menuAñadirCompra.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.menuAñadirCompra.Name = "menuAñadirCompra";
+            this.menuAñadirCompra.Size = new System.Drawing.Size(218, 26);
+            this.menuAñadirCompra.Text = "AñadirCompra";
+            this.menuAñadirCompra.Click += new System.EventHandler(this.menuAñadirCompra_Click);
+            // 
+            // menuVerCompras
+            // 
+            this.menuVerCompras.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.menuVerCompras.IconColor = System.Drawing.Color.Black;
+            this.menuVerCompras.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.menuVerCompras.Name = "menuVerCompras";
+            this.menuVerCompras.Size = new System.Drawing.Size(218, 26);
+            this.menuVerCompras.Text = "Ver compras";
+            this.menuVerCompras.Click += new System.EventHandler(this.menuVerCompras_Click);
             // 
             // Inicio
             // 
@@ -230,6 +254,8 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private System.Windows.Forms.Panel container;
         private FontAwesome.Sharp.IconMenuItem menuUsuarios;
+        private FontAwesome.Sharp.IconMenuItem menuAñadirCompra;
+        private FontAwesome.Sharp.IconMenuItem menuVerCompras;
     }
 }
 

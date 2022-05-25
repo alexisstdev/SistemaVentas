@@ -1,0 +1,26 @@
+[
+  {
+    "Correo": "pepe@gmail",
+    "IDCliente": "001",
+    "NombreCliente": "pepe",
+    "Telefono": "867"
+  },
+  {
+    "Correo": "rod@",
+    "IDCliente": "002",
+    "NombreCliente": "rodrigo",
+    "Telefono": "873"
+  },
+  {
+    "Correo": "pablo@gmail",
+    "IDCliente": "003",
+    "NombreCliente": "pablo",
+    "Telefono": "867"
+  },
+  {
+    "Correo": "pablo@gmail",
+    "IDCliente": "004",
+    "NombreCliente": "pablo",
+    "Telefono": "867"
+  }
+]

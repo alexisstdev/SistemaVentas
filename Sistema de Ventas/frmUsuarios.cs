@@ -57,7 +57,8 @@ namespace Sistema_de_Ventas
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            miUsuario.EliminarUsuario(dtgUsuarios.CurrentCell.RowIndex);
+            miUsuario.misUsuarios.RemoveAt(dtgUsuarios.CurrentCell.RowIndex);
+            miUsuario.SerializarLista();
             ActualizarDataGrid();
             LimpiarDatos();
         }
@@ -84,7 +85,7 @@ namespace Sistema_de_Ventas
                                  MessageBoxIcon.Question);
 
                 if (messageBox == DialogResult.No) return;
-                else miUsuario.EliminarUsuario(miUsuario.misUsuarios.FindIndex(x => x.IDUsuario == txtID.Text));
+                else miUsuario.misUsuarios.RemoveAt(miUsuario.misUsuarios.FindIndex(x => x.IDUsuario == txtID.Text));
             }
             var usuario = new Usuario
             {
@@ -94,7 +95,8 @@ namespace Sistema_de_Ventas
                 Contraseña = txtContraseña.Text,
                 Rol = cbxRol.Text
             };
-            miUsuario.AñadirUsuario(usuario);
+            miUsuario.misUsuarios.Add(usuario);
+            miUsuario.SerializarLista();
             ActualizarDataGrid();
             LimpiarDatos();
         }

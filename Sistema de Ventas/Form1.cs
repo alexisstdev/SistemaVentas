@@ -1,36 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FontAwesome.Sharp;
 
 namespace Sistema_de_Ventas
 {
     public partial class Inicio : Form
     {
-        private static Usuario usuarioActual;
-        private static IconMenuItem MenuActivo = null;
         private static Form formularioActivo = null;
+        private static IconMenuItem MenuActivo = null;
+        private static Usuario usuarioActual;
 
         public Inicio(Usuario miUsuario)
         {
             usuarioActual = miUsuario;
             InitializeComponent();
-        }
-
-        private void Inicio_Load(object sender, EventArgs e)
-        {
-            lblUser.Text = $"Usuario: {usuarioActual.NombreUsuario} ({usuarioActual.Rol})";
-
-            if (usuarioActual.Rol == "Empleado")
-            {
-                menuCompras.Visible = false;
-            }
         }
 
         private void AbrirForms(IconMenuItem menu, Form formulario)
@@ -50,14 +34,14 @@ namespace Sistema_de_Ventas
             formulario.Show();
         }
 
-        private void menuVentas_Click(object sender, EventArgs e)
+        private void Inicio_Load(object sender, EventArgs e)
         {
-            AbrirForms((IconMenuItem)sender, new frmVentas());
-        }
+            lblUser.Text = $"Usuario: {usuarioActual.NombreUsuario} ({usuarioActual.Rol})";
 
-        private void menuCompras_Click(object sender, EventArgs e)
-        {
-            AbrirForms((IconMenuItem)sender, new frmCompras());
+            if (usuarioActual.Rol == "Empleado")
+            {
+                menuCompras.Visible = false;
+            }
         }
 
         private void menuClientes_Click(object sender, EventArgs e)
@@ -73,6 +57,21 @@ namespace Sistema_de_Ventas
         private void menuUsuarios_Click_1(object sender, EventArgs e)
         {
             AbrirForms((IconMenuItem)sender, new frmUsuarios());
+        }
+
+        private void menuVentas_Click(object sender, EventArgs e)
+        {
+            AbrirForms((IconMenuItem)sender, new frmVentas());
+        }
+
+        private void menuAñadirCompra_Click(object sender, EventArgs e)
+        {
+            AbrirForms((IconMenuItem)sender, new frmCompras());
+        }
+
+        private void menuVerCompras_Click(object sender, EventArgs e)
+        {
+            AbrirForms((IconMenuItem)sender, new frmDetallesCompras());
         }
     }
 }

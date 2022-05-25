@@ -17,47 +17,14 @@ namespace Sistema_de_Ventas
             dtgProductos.Rows.Clear();
             foreach (Producto miProducto in miProducto.misProductos)
             {
-                dtgProductos.Rows.Add(miProducto.IDProducto, miProducto.NombreProducto, miProducto.StockProducto, miProducto.PrecioCompra, miProducto.PrecioVenta);
+                dtgProductos.Rows.Add(miProducto.IDProducto, miProducto.NombreProducto, miProducto.StockProducto, miProducto.PrecioCompra, miProducto.PrecioVenta, miProducto.Proveedor);
             }
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            int indexBusqueda = -1;
-            if (txtBusqueda.Text == "")
-            {
-                MessageBox.Show("Campo de búsqueda vacío");
-                return;
-            }
-            switch (cbxBuscar.Text)
-            {
-                case "Nombre":
-                    indexBusqueda = miProducto.misProductos.FindIndex(x => x.NombreProducto.Contains(txtBusqueda.Text));
-                    break;
-
-                case "ID":
-                    indexBusqueda = miProducto.misProductos.FindIndex(x => x.IDProducto.Contains(txtBusqueda.Text));
-                    break;
-
-                case "stock":
-                    indexBusqueda = miProducto.misProductos.FindIndex(x => x.StockProducto == Int32.Parse(txtBusqueda.Text));
-                    break;
-
-                default:
-                    MessageBox.Show("Seleccione una opción de búsqueda");
-                    break;
-            }
-            if (indexBusqueda == -1)
-            {
-                MessageBox.Show($"No se encontró un producto con este {cbxBuscar.Text}");
-                return;
-            }
-            dtgProductos.Rows[indexBusqueda].Selected = true;
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            miProducto.EliminarProducto(dtgProductos.CurrentCell.RowIndex);
+            miProducto.misProductos.RemoveAt(dtgProductos.CurrentCell.RowIndex);
+            miProducto.SerializarLista();
             ActualizarDataGrid();
             LimpiarDatos();
         }
@@ -80,18 +47,20 @@ namespace Sistema_de_Ventas
                                  MessageBoxIcon.Question);
 
                 if (messageBox == DialogResult.No) return;
-                else miProducto.EliminarProducto(miProducto.misProductos.FindIndex(x => x.IDProducto == txtID.Text));
+                else miProducto.misProductos.RemoveAt(miProducto.misProductos.FindIndex(x => x.IDProducto == txtID.Text));
             }
             var producto = new Producto
             {
                 IDProducto = txtID.Text,
                 NombreProducto = txtNombre.Text,
+                Proveedor = txtProveedor.Text,
                 StockProducto = (int)nudStock.Value,
                 PrecioCompra = (double)nudCompra.Value,
-                PrecioVenta = (double)nudVenta.Value,
+                PrecioVenta = (double)nudVenta.Value
             };
 
-            miProducto.AñadirProducto(producto);
+            miProducto.misProductos.Add(producto);
+            miProducto.SerializarLista();
 
             ActualizarDataGrid();
 
@@ -116,6 +85,7 @@ namespace Sistema_de_Ventas
                 nudStock.Value = miProducto.misProductos[dtgProductos.CurrentCell.RowIndex].StockProducto;
                 nudCompra.Value = (decimal)miProducto.misProductos[dtgProductos.CurrentCell.RowIndex].PrecioCompra;
                 nudVenta.Value = (decimal)miProducto.misProductos[dtgProductos.CurrentCell.RowIndex].PrecioVenta;
+                txtProveedor.Text = miProducto.misProductos[dtgProductos.CurrentCell.RowIndex].Proveedor;
             }
         }
 
@@ -133,6 +103,40 @@ namespace Sistema_de_Ventas
         {
             miProducto.DeserializarLista();
             ActualizarDataGrid();
+        }
+
+        private void btnBuscar_Click_1(object sender, EventArgs e)
+        {
+            int indexBusqueda = -1;
+            if (txtBusqueda.Text == "")
+            {
+                MessageBox.Show("Campo de búsqueda vacío");
+                return;
+            }
+            switch (cbxBuscar.Text)
+            {
+                case "Nombre":
+                    indexBusqueda = miProducto.misProductos.FindIndex(x => x.NombreProducto.Contains(txtBusqueda.Text));
+                    break;
+
+                case "ID":
+                    indexBusqueda = miProducto.misProductos.FindIndex(x => x.IDProducto.Contains(txtBusqueda.Text));
+                    break;
+
+                case "Stock":
+                    indexBusqueda = miProducto.misProductos.FindIndex(x => x.StockProducto == int.Parse(txtBusqueda.Text));
+                    break;
+
+                default:
+                    MessageBox.Show("Seleccione una opción de búsqueda");
+                    break;
+            }
+            if (indexBusqueda == -1)
+            {
+                MessageBox.Show($"No se encontró un producto con este {cbxBuscar.Text}");
+                return;
+            }
+            dtgProductos.Rows[indexBusqueda].Selected = true;
         }
     }
 }

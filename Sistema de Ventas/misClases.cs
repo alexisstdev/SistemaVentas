@@ -1,18 +1,63 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Sistema_de_Ventas
 {
+    [Serializable]
     public class Compra
     {
-        public int Cantidad { get; set; }
+        public List<Compra> misCompras = new List<Compra>();
+        public List<Producto> misProductosCompra = new List<Producto>();
+
         public DateTime FechaCompra { get; set; }
         public string IDCompra { get; set; }
-        public double PrecioCompra { get; set; }
-        public double PrecioVenta { get; set; }
         public double TotalCompra { get; set; }
+
+        public double CalcularTotal()
+        {
+            TotalCompra = 0;
+            foreach (Producto miProducto in misProductosCompra)
+            {
+                TotalCompra += miProducto.PrecioCompra * miProducto.StockProducto;
+            }
+            return TotalCompra;
+        }
+
+        public void FinalizarCompra()
+        {
+            List<Producto> productosEnMemoria = Serializador.Deserializar<List<Producto>>("misProductos.json");
+
+            foreach (Producto miProducto in misProductosCompra)
+            {
+                int i = productosEnMemoria.FindIndex(x => x.IDProducto == miProducto.IDProducto);
+                if (i == -1)
+                {
+                    productosEnMemoria.Add(miProducto);
+                }
+                else
+                {
+                    productosEnMemoria[i].StockProducto += miProducto.StockProducto;
+                    productosEnMemoria[i].PrecioCompra = miProducto.PrecioCompra;
+                    productosEnMemoria[i].PrecioVenta = miProducto.PrecioVenta;
+                }
+            }
+
+            Serializador.Serializar("misProductos.json", productosEnMemoria);
+        }
+
+        public void SerializarListaCompra()
+        {
+            Serializador.Serializar("misCompras.json", misCompras);
+        }
+
+        public List<Compra> DeserializarListaCompra()
+        {
+            if (Serializador.Deserializar<List<Compra>>("misCompras.json") == default) return misCompras;
+            return misCompras = Serializador.Deserializar<List<Compra>>("misCompras.json");
+        }
     }
 
     [Serializable]
@@ -22,28 +67,20 @@ namespace Sistema_de_Ventas
 
         public string IDProducto { get; set; }
         public string NombreProducto { get; set; }
+        public string Proveedor { get; set; }
         public double PrecioCompra { get; set; }
         public double PrecioVenta { get; set; }
         public int StockProducto { get; set; }
 
-        public void AñadirProducto(Producto miProducto)
+        public void SerializarLista()
         {
-            misProductos.Add(miProducto);
-            Serializador.Serializar("misProductos.dat", misProductos);
+            Serializador.Serializar("misProductos.json", misProductos);
         }
 
-        public void EliminarProducto(int index)
+        public List<Producto> DeserializarLista()
         {
-            misProductos.RemoveAt(index);
-            Serializador.Serializar("misProductos.dat", misProductos);
-        }
-
-        public void DeserializarLista()
-        {
-            if (Serializador.Deserializar<List<Producto>>("misProductos.dat") == default) return;
-
-            misProductos = Serializador.Deserializar<List<Producto>>("misProductos.dat");
-            Serializador.Serializar("misProductos.dat", misProductos);
+            if (Serializador.Deserializar<List<Producto>>("misProductos.json") == default) return misProductos;
+            return misProductos = Serializador.Deserializar<List<Producto>>("misProductos.json");
         }
     }
 
@@ -57,24 +94,15 @@ namespace Sistema_de_Ventas
         public string NombreCliente { get; set; }
         public string Telefono { get; set; }
 
-        public void AñadirCliente(Cliente miCliente)
+        public void SerializarLista()
         {
-            misClientes.Add(miCliente);
-            Serializador.Serializar("misClientes.dat", misClientes);
-        }
-
-        public void EliminarCliente(int index)
-        {
-            misClientes.RemoveAt(index);
-            Serializador.Serializar("misClientes.dat", misClientes);
+            Serializador.Serializar("misClientes.json", misClientes);
         }
 
         public void DeserializarLista()
         {
-            if (Serializador.Deserializar<List<Cliente>>("misClientes.dat") == default) return;
-
-            misClientes = Serializador.Deserializar<List<Cliente>>("misClientes.dat");
-            Serializador.Serializar("misClientes.dat", misClientes);
+            if (Serializador.Deserializar<List<Cliente>>("misClientes.json") == default) return;
+            misClientes = Serializador.Deserializar<List<Cliente>>("misClientes.json");
         }
     }
 
@@ -88,24 +116,15 @@ namespace Sistema_de_Ventas
         public string NombreUsuario { get; set; }
         public string Rol { get; set; }
 
-        public void AñadirUsuario(Usuario miUsuario)
+        public void SerializarLista()
         {
-            misUsuarios.Add(miUsuario);
-            Serializador.Serializar("misUsuarios.dat", misUsuarios);
-        }
-
-        public void EliminarUsuario(int index)
-        {
-            misUsuarios.RemoveAt(index);
-            Serializador.Serializar("misUsuarios.dat", misUsuarios);
+            Serializador.Serializar("misUsuarios.json", misUsuarios);
         }
 
         public void DeserializarLista()
         {
-            if (Serializador.Deserializar<List<Usuario>>("misUsuarios.dat") == default) return;
-
-            misUsuarios = Serializador.Deserializar<List<Usuario>>("misUsuarios.dat");
-            Serializador.Serializar("misUsuarios.dat", misUsuarios);
+            if (Serializador.Deserializar<List<Usuario>>("misUsuarios.json") == default) return;
+            misUsuarios = Serializador.Deserializar<List<Usuario>>("misUsuarios.json");
         }
     }
 
@@ -122,15 +141,18 @@ namespace Sistema_de_Ventas
 
     public static class Serializador
     {
-        private static BinaryFormatter bin = new BinaryFormatter();
+        private static string carpeta = @"..\..\..\DatosJson\";
 
         public static void Serializar(string nombreArchivo, object miObjeto)
         {
-            using (Stream stream = File.Open(nombreArchivo, FileMode.Create))
+            Directory.CreateDirectory(carpeta);
+
+            using (Stream stream = File.Open(carpeta + nombreArchivo, FileMode.Create))
             {
                 try
                 {
-                    bin.Serialize(stream, miObjeto);
+                    var options = new JsonSerializerOptions { WriteIndented = true };
+                    JsonSerializer.Serialize(stream, miObjeto, options);
                 }
                 catch (Exception)
                 {
@@ -141,13 +163,15 @@ namespace Sistema_de_Ventas
 
         public static T Deserializar<T>(string nombreArchivo)
         {
+            Directory.CreateDirectory(carpeta);
+
             T objeto;
-            using (Stream stream = File.Open(nombreArchivo, FileMode.OpenOrCreate))
+            using (Stream stream = File.Open(carpeta + nombreArchivo, FileMode.OpenOrCreate))
             {
                 if (stream.Length == 0) return default;
                 try
                 {
-                    objeto = (T)bin.Deserialize(stream);
+                    objeto = JsonSerializer.Deserialize<T>(stream);
                 }
                 catch (Exception)
                 {

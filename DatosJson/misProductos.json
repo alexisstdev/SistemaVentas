@@ -1,0 +1,42 @@
+[
+  {
+    "IDProducto": "5678567",
+    "NombreProducto": "765765",
+    "Proveedor": "fgh",
+    "PrecioCompra": 15,
+    "PrecioVenta": 3,
+    "StockProducto": 30
+  },
+  {
+    "IDProducto": "dfhdfh",
+    "NombreProducto": "hdfgdfg",
+    "Proveedor": "dfgdf",
+    "PrecioCompra": 33,
+    "PrecioVenta": 15,
+    "StockProducto": 33
+  },
+  {
+    "IDProducto": "3435",
+    "NombreProducto": "dfgdfg",
+    "Proveedor": "fdgdf",
+    "PrecioCompra": 27,
+    "PrecioVenta": 21,
+    "StockProducto": 15
+  },
+  {
+    "IDProducto": "dfgdf",
+    "NombreProducto": "dfgdfg",
+    "Proveedor": "dfgdfg",
+    "PrecioCompra": 15,
+    "PrecioVenta": 30,
+    "StockProducto": 15
+  },
+  {
+    "IDProducto": "jhgjg",
+    "NombreProducto": "ghjghjghj",
+    "Proveedor": "ghjjhg",
+    "PrecioCompra": 18,
+    "PrecioVenta": 18,
+    "StockProducto": 18
+  }
+]

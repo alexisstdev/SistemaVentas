@@ -1,0 +1,23 @@
+[
+  {
+    "Contrase\u00F1a": "123",
+    "Correo": "ivan@",
+    "IDUsuario": "002",
+    "NombreUsuario": "ivan",
+    "Rol": "Administrador"
+  },
+  {
+    "Contrase\u00F1a": "123",
+    "Correo": "pepe@",
+    "IDUsuario": "003",
+    "NombreUsuario": "pepe",
+    "Rol": "Empleado"
+  },
+  {
+    "Contrase\u00F1a": "123",
+    "Correo": "alexis@",
+    "IDUsuario": "001",
+    "NombreUsuario": "alexis",
+    "Rol": "Administrador"
+  }
+]
